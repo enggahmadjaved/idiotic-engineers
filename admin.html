@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idiotic Engineers | Admin Panel</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+  <a class="brand" href="index.html">Idiotic Engineers <span>ADMIN</span></a>
+
+  <a class="nav-btn" href="index.html">Public Directory</a>
+  <button class="nav-btn admin-btn" id="adminBtn"><i class="fa-solid fa-lock"></i> Admin</button>
+</header>
+
+<section class="hero">
+  <h1>Idiotic Engineers <span>Admin Panel.</span></h1>
+  <p>
+    Manage team members, profile photos, roles, and display order.
+  </p>
+</section>
+
+<main class="container">
+  <div id="membersGrid" class="grid"></div>
+</main>
+
+<footer>
+  Idiotic Engineers
+</footer>
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="loginModal">
+  <div class="modal-box" style="max-width:430px">
+
+    <div class="modal-head">
+      <h2>Admin Access</h2>
+      <button class="close" data-close="loginModal">×</button>
+    </div>
+
+    <p class="notice">
+      The public page never asks visitors for a password.
+      Enter the admin PIN only when you choose to open the admin controls.
+    </p>
+
+    <div class="field" style="margin-top:16px">
+      <label for="adminPin">Admin PIN</label>
+      <input
+        id="adminPin"
+        type="password"
+        autocomplete="off"
+        placeholder="Enter your PIN"
+      >
+    </div>
+
+    <div
+      id="loginError"
+      style="color:var(--danger);font-size:.8rem;margin-top:8px;display:none"
+    >
+      Incorrect PIN.
+    </div>
+
+    <div class="modal-actions">
+      <button class="secondary" data-close="loginModal">
+        Cancel
+      </button>
+
+      <button class="primary" id="loginSubmit">
+        Enter Admin
+      </button>
+    </div>
+
+    <div class="login-note">
+      <i class="fa-solid fa-shield-halved"></i>
+      For real online security, connect this to Firebase Authentication
+      rather than relying on a PIN stored in this file.
+    </div>
+
+  </div>
+</div>
+
+<!-- MEMBER MODAL -->
+<div class="modal" id="memberModal">
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h2 id="modalTitle">Add Member</h2>
+      <button class="close" data-close="memberModal">×</button>
+    </div>
+
+    <form id="memberForm">
+
+      <input type="hidden" id="editId">
+
+      <div class="form-grid">
+
+        <!-- NAME -->
+        <div class="field">
+          <label>Full Name *</label>
+          <input
+            id="name"
+            required
+            maxlength="80"
+            placeholder="e.g. Ahmad Khan"
+          >
+        </div>
+
+        <!-- DISPLAY ORDER -->
+        <div class="field">
+          <label>Display Order *</label>
+          <input
+            id="displayOrder"
+            type="number"
+            min="1"
+            value="1"
+            required
+          >
+          <div class="order-note">
+            1 = first, 2 = second, 3 = third, etc.
+          </div>
+        </div>
+
+        <!-- ROLE -->
+        <div class="field">
+          <label>Role *</label>
+          <input
+            id="role"
+            required
+            maxlength="50"
+            placeholder="e.g. Founder, Co-Founder, Developer"
+          >
+        </div>
+
+        <!-- PHOTO -->
+        <div class="field">
+          <label>Profile Picture</label>
+          <input
+            id="photo"
+            type="file"
+            accept="image/*"
+          >
+        </div>
+
+        <!-- BIO -->
+        <div class="field full">
+          <label>What do they work on?</label>
+          <textarea
+            id="bio"
+            maxlength="500"
+            placeholder="Short description of their work..."
+          ></textarea>
+        </div>
+
+        <!-- ADMIN -->
+        <div class="field full">
+          <label
+            style="display:flex;align-items:center;gap:9px;cursor:pointer"
+          >
+            <input
+              id="makeAdmin"
+              type="checkbox"
+              style="width:auto"
+            >
+            Make this person the Admin
+          </label>
+        </div>
+
+      </div>
+
+      <img
+        id="preview"
+        class="preview"
+        alt="Photo preview"
+      >
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="secondary"
+          data-close="memberModal"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="primary"
+          type="submit"
+        >
+          Save Member
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+<script src="js/members-data.js" defer></script>
+<script src="js/admin.js" defer></script>
+
+</body>
+</html>
